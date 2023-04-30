@@ -47,7 +47,7 @@ class Request(object):
 
 
 class AsyncHelper:
-    def __int__(self):
+    def __init__(self):
         self.tasks = []
 
     def add_to_queue(self, coro):
@@ -60,7 +60,7 @@ class AsyncHelper:
 
 class IAsyncRequest(ABC):
 
-    def __int__(self, async_helper: AsyncHelper, base_url=None, retries=0):
+    def __init__(self, async_helper: AsyncHelper, base_url=None, retries=0):
         self.results = list()
         self.async_helper = async_helper
         self.base_url = base_url
@@ -73,8 +73,8 @@ class IAsyncRequest(ABC):
 
 class AsyncRequest(IAsyncRequest):
 
-    def __int__(self, async_helper=AsyncHelper(), base_url=None, retries=0):
-        super().__int__(async_helper, base_url, retries)
+    def __init__(self, async_helper=AsyncHelper(), base_url=None, retries=0):
+        super().__init__(async_helper, base_url, retries)
         self.results = list()
         self.async_helper = async_helper
         self.base_url = base_url
@@ -108,7 +108,7 @@ class AsyncRequest(IAsyncRequest):
                 'method': request.method.value,
                 'traceback': traceback.format_exc()
             }
-            raise MultiRequestError(error)
+            raise MultiRequestError(error) from exe
 
     async def __decide_call_type(self, client: ClientSession, request: Request):
         if request.method == Method.GET:
