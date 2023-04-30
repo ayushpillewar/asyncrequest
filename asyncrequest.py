@@ -95,7 +95,7 @@ class AsyncRequest(IAsyncRequest):
                 'method': request.method.value,
                 'traceback': traceback.format_exc()
             }
-            raise MultiRequestError(error)
+            raise MultiRequestError(error) from exe
 
     async def __make_call_same_host(self, request: Request, client: ClientSession):
         logger.debug(request)
@@ -163,6 +163,10 @@ class AsyncRequest(IAsyncRequest):
                 self.async_helper.add_to_queue(self.__make_call(req))
             response = await self.async_helper.execute_all()
             return response
+
+    def call_apis(self, requests: list):
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        return asyncio.run(self.make_async_calls(requests))
 
     @staticmethod
     def convert_body(body):
