@@ -18,6 +18,7 @@ class MultiRequestError(Exception):
     pass
 
 
+# TODO
 class ServerOverloadError(Exception):
     pass
 

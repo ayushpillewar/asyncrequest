@@ -1,5 +1,5 @@
 import unittest
-from asyncrequest import AsyncRequest, Request, Method
+from src.asyncrequest.asyncrequest import AsyncRequest, Request, Method
 import requests
 import time
 
