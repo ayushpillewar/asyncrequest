@@ -13,7 +13,7 @@ and base_url will be appended to all the urls you pass to the call_apis method
 # example 1
 When the host/server is same this will provide you the best performance because there is also network optimization done
 which will use the underlying session created for the first request.
-#imporing stuff
+#importing stuff
 
 import AsyncRequest, Request, Method
 
@@ -38,7 +38,7 @@ When the host/server is different you can make max 500(number may vary depending
 api calls using this since there are some
 limitations on the number of ports/connection you can open from your system
 
-#imporing stuff
+#importing stuff
 
 import AsyncRequest, Request, Method
 
